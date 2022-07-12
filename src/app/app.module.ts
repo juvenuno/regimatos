@@ -6,10 +6,16 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { ServicesComponent } from './services/services.component';
+import { BlogComponent } from './blog/blog.component';
+import { ProductsComponent } from './products/products.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ServicesComponent,
+    BlogComponent,
+    ProductsComponent
   ],
   imports: [
     BrowserModule,
