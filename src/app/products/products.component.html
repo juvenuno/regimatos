@@ -1,20 +1,17 @@
-<div id="bodyFixed">
-    <div class="grow pic">
-        <a href=""><img src="../../../assets/products/reg.jpg" title="Cash Registers"></a>
-    </div>
-    <div class="grow pic">
-        <a href=""><img src="../../../assets/products/etpos.PNG" title="POS Systems"></a>
-    </div>
-    <div class="grow pic">
-        <a href=""><img src="../../../assets/products/slicer1.jpg" title="Slicers"></a>
-    </div>
-    <div class="grow pic">
-        <a href=""><img src="../../../assets/products/phone1.PNG" title="Smartphones"></a>
-    </div>
-    <div class="grow pic">
-        <a href=""><img src="../../../assets/products/scale.png" title="Retail Scales"></a>
-    </div>
-    <div class="grow pic">
-        <a href=""><img src="../../../assets/products/sec1.PNG" title="Security Systems"></a>
+<div class="container">
+    <div class="row">
+    
+        <img routerLink="/product" [queryParams]="{cat: 'registers'}" class="col-lg-4 col-md-6 col-sm-12 product-img" src="../../../assets/products/reg.jpg" title="Cash Registers">
+
+        <img routerLink="/product" [queryParams]="{cat: 'pos'}" class="col-lg-4 col-md-6 col-sm-12 product-img" src="../../../assets/products/etpos.PNG" title="POS Systems">
+    
+        <img routerLink="/product" [queryParams]="{cat: 'slicers'}" class="col-lg-4 col-md-6 col-sm-12 product-img" src="../../../assets/products/slicer1.jpg" title="Slicers">
+    
+        <img routerLink="/product" [queryParams]="{cat: 'phones'}" class="col-lg-4 col-md-6 col-sm-12 product-img" src="../../../assets/products/phone1.PNG" title="Smartphones">
+
+        <img routerLink="/product" [queryParams]="{cat: 'scales'}" class="col-lg-4 col-md-6 col-sm-12 product-img" src="../../../assets/products/scale.png" title="Retail Scales">
+    
+        <img routerLink="/product" [queryParams]="{cat: 'security-systems'}" class="col-lg-4 col-md-6 col-sm-12 product-img" src="../../../assets/products/sec1.PNG" title="Security Systems">
+    
     </div>
 </div>
