@@ -7,14 +7,9 @@ html, body {
     color: white;
 }
 
-.spacer {
-    flex: 1 1 auto;
+h3 {
+    color: rgb(13, 241, 13);
 }
-
-.mat-toolbar.mat-primary {
-    background-color: rgb(13, 241, 13);
-    color: black
- }
 
 .padding {
     padding: 20px;
