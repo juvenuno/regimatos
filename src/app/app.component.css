@@ -3,10 +3,28 @@
 }
 
 .mat-toolbar.mat-primary {
-    background-color: rgb(13, 241, 13);
-    color: black
+    background-color: rgb(0, 0, 0, 0.8);
+    border-bottom: 2px solid rgb(13, 241, 13);
+    color: lightgrey
  }
 
 .mat-button {
     font-size: large;
+}
+
+.footer {
+    border-top: 2px solid rgb(13, 241, 13);
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgb(0, 0, 0, 0.4);
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.footer-img-link {
+    display: inline-block;
+    padding: 0px 20px 10px 20px;
 }

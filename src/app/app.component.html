@@ -1,4 +1,5 @@
 <mat-toolbar color="primary">
+  <img routerLink="/" src="../assets/logo-xs.jpg" title="Home page"/>
   <button mat-button class="home-button" routerLink="/">Regimatos</button>
   
   <span class="spacer"></span>
@@ -7,4 +8,12 @@
   <a mat-button routerLink="/services">Services</a>
   <a mat-button routerLink="/blog">News</a>
 </mat-toolbar>
+
 <router-outlet></router-outlet>
+
+<div class="footer">
+  <p>Rua Tenente Manuel Joaquim, C-29 | Balsa | 3510-086 Viseu | Portugal</p>
+  <p>Phone: +351 232 086 010 | Email: regimatos_rm@hotmail.com</p>
+  <div class="footer-img-link"><a href="http://www.facebook.com/rmviseu" target="_blank"><img src="../assets/face-logo.png" title="Visit our Facebook page"/></a></div> 
+  <div class="footer-img-link"><a href="https://goo.gl/maps/K3p949d87GRZ7nrC7" target="_blank"><img src="../assets/maps-logo.jpg" title="Visit our Google Maps page"/></a> </div>
+</div>
