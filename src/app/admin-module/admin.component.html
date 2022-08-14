@@ -1,0 +1,23 @@
+<div class="padding">
+    <div class="container content-bg">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-12">
+                <ul>
+                    <li>
+                        <a routerLink="/admin/add-product">Add Product</a>
+                    </li>
+                    <li>
+                        <a routerLink="/admin/add-blog-entry">Add Blog Entry</a>
+                    </li>
+                    <li>
+                        <a (click)="onSignout()">Signout</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-lg-9 col-md-6 col-sm-12">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
