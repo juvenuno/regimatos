@@ -6,3 +6,20 @@ a {
 li {
     list-style-type: none;
 }
+
+.cardFormField {
+    width: 100%;
+    color: black;
+}
+
+.padding-content {
+    padding: 30px 20px 40px 20px;
+}
+
+.white {
+    background-color: white;
+}
+
+p {
+    color: black;
+}

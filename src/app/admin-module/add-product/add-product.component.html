@@ -1,1 +1,15 @@
-<p>add product here!</p>
+<div>
+    <p>Add product</p>
+    <form [formGroup]="form">
+        <mat-form-field class="cardFormField">
+            <input matInput type="text" required placeholder="Name" formControlName="name" id="name" maxlength="100">
+        </mat-form-field>
+    
+        <mat-form-field class="cardFormField">
+            <textarea matInput type="text" color=warn required placeholder="Description" formControlName="description" id="description" maxlength="100"></textarea>
+        </mat-form-field>
+    </form>
+
+    <button mat-button #submitButton [disabled]="!form.valid"
+          color="accent" (click)="submitForm()"> Submeter </button>
+</div>
