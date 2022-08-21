@@ -1,15 +1,24 @@
 <div>
     <p>Add product</p>
+    <mat-progress-bar *ngIf="saving" mode="indeterminate"></mat-progress-bar>
     <form [formGroup]="form">
         <mat-form-field class="cardFormField">
             <input matInput type="text" required placeholder="Name" formControlName="name" id="name" maxlength="100">
         </mat-form-field>
     
         <mat-form-field class="cardFormField">
-            <textarea matInput type="text" color=warn required placeholder="Description" formControlName="description" id="description" maxlength="100"></textarea>
+            <textarea matInput type="text" color=warn required placeholder="Description" formControlName="description" id="description" maxlength="400"></textarea>
+        </mat-form-field>
+
+        <mat-form-field class="cardFormField">
+            <mat-select required placeholder="Product type" formControlName="type">
+                <mat-option *ngFor="let t of productTypes" [value]="t.code">
+                    {{t.name}}
+                </mat-option>
+            </mat-select>
         </mat-form-field>
     </form>
 
     <button mat-button #submitButton [disabled]="!form.valid"
-          color="accent" (click)="submitForm()"> Submeter </button>
+          color="accent" (click)="submitForm()"> Submit </button>
 </div>

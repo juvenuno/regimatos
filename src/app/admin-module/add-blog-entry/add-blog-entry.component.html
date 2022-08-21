@@ -1,1 +1,18 @@
-<p>add blog entry here!</p>
+<div>
+    <p>Add blog entry</p>
+    
+    <mat-progress-bar *ngIf="saving" mode="indeterminate"></mat-progress-bar>
+
+    <form [formGroup]="form">
+        <mat-form-field class="cardFormField">
+            <input matInput type="text" required placeholder="Title" formControlName="title" id="title" maxlength="100">
+        </mat-form-field>
+    
+        <mat-form-field class="cardFormField">
+            <textarea matInput type="text" color=warn required placeholder="Content" formControlName="content" id="content" maxlength="400"></textarea>
+        </mat-form-field>
+    </form>
+
+    <button mat-button #submitButton [disabled]="!form.valid"
+          color="accent" (click)="submitForm()"> Submit </button>
+</div>
