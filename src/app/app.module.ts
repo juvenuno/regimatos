@@ -3,8 +3,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
+import { provideFirebaseApp, getApp, initializeApp } from '@angular/fire/app';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-
+import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -34,7 +35,9 @@ import { environment } from '../environments/environment';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireModule.initializeApp(environment.firebase), // firebase auth ui
+    provideFirebaseApp(() => initializeApp(environment.firebase)), //firestore
+    provideFirestore(() => getFirestore()), //firestore
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,

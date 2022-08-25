@@ -1,21 +1,51 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Firestore, collectionData, collection, query, where, getDocs } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
+
+
+interface Product{
+  name: string,
+  description: string,
+  type: string,
+}
 
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css']
 })
-export class ProductComponent implements OnInit {
+export class ProductComponent {
 
-  productCategory: String = "";
+  productCategory: string = "";
+  products: Product[] = []
+  noProducts = false;
 
-  constructor(private activatedRoute: ActivatedRoute) { }
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private firestore: Firestore,
+  ) {
 
-  ngOnInit(): void {
     this.activatedRoute.queryParams.subscribe(params => {
       this.productCategory = params['cat'];
       console.log(this.productCategory);
+      this.getProducts(this.productCategory);
+    });
+  }
+
+  private async getProducts(category: string) {
+    const prodCollection = collection(this.firestore, 'products');
+    const q = query(prodCollection, where("type", "==", category));
+    const querySnapshot = await getDocs(q);
+    this.products = []
+    if (querySnapshot.size === 0) {
+      this.noProducts = true;
+    }
+    querySnapshot.forEach((doc) => {
+      this.products.push({
+        name: doc.data()['name'],
+        description: doc.data()['description'],
+        type: doc.data()['type'],
+      })
     });
   }
 

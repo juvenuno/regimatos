@@ -4,12 +4,13 @@
             <img class="col-sm-12 padding headerImg" [src]="getHeaderImage()" />
         </div>
 
-        <div class='row'>
+        <p *ngIf="noProducts">No products available for category</p>
+
+        <div class='row' *ngFor="let product of products">
             <img class="col-lg-3 col-md-6 col-sm-12 padding" src='../../../assets/services/repair.jpg'/>
-            <div class="col-lg-9 col-md-6 col-sm-12 padding">
-                <h3>Add Content Later</h3>
-                <p>description</p>
-                <p>Would you like to get a quote?</p>
+            <div class="col-lg-9 col-md-6 col-sm-12 padding" >
+                <h3> {{ product.name }} </h3>
+                <p> {{ product.description }} </p>
             </div>
         </div>
     </div>
