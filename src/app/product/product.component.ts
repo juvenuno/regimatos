@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Firestore, collectionData, collection, query, where, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, query, where, getDocs } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
-
 
 interface Product{
   name: string,
   description: string,
   type: string,
+  imageUrl: string,
 }
 
 @Component({
@@ -45,6 +45,7 @@ export class ProductComponent {
         name: doc.data()['name'],
         description: doc.data()['description'],
         type: doc.data()['type'],
+        imageUrl: doc.data()['imageUrl'],
       })
     });
   }

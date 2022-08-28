@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FileUploadService } from '../service/upload-service';
 
 interface ProductType {
   name: string,
@@ -15,6 +17,8 @@ interface ProductType {
 })
 export class AddProductComponent {
 
+  fileName = '';
+  file: any
   saving = false;
   form: FormGroup;
   productTypes: ProductType[] = [
@@ -27,20 +31,43 @@ export class AddProductComponent {
   ]
 
   constructor(
-    private firestore: AngularFirestore,
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
+    private uploadService: FileUploadService,
+    private firestore: AngularFirestore,
   ) {
     this.form = this.formBuilder.group(new Product())
   }
 
+  onFileSelected(event: any) {
+    const newFile = event.target.files[0];
+
+    if (newFile) {
+      this.file = newFile;
+      this.fileName = newFile.name;
+    }
+  }
+
   submitForm() {
+    if (this.fileName === '') {
+      this.snackBar.open("Please select one image for product");
+      return;
+    }
+
     this.saving = true;
+
+    this.uploadService.saveFileToStorage('products', this.file).subscribe(
+      url => this.saveProductToFirestore(url)
+    )
+  }
+
+  private saveProductToFirestore(imageUrl: string) {
     const product = this.form.value
-    console.log(product)
+    product.imageUrl = imageUrl
+    console.log('saving product', product);
 
     this.firestore.collection('products').add(product).then(
-      _ => {
+      _ => {        
         this.form = this.formBuilder.group(new Product());
         this.snackBar.open("Product details saved.");
         this.saving = false;
@@ -53,12 +80,14 @@ export class AddProductComponent {
       }
     );
   }
+  
 }
 
 export class Product {
   constructor(
     public name: string = '',
     public description: string = '',
-    public type: string = ''
+    public type: string = '',
+    public imageUrl: string = ''
   ){}
 }

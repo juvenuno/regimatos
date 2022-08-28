@@ -11,8 +11,17 @@
         <mat-form-field class="cardFormField">
             <textarea matInput type="text" color=warn required placeholder="Content" formControlName="content" id="content" maxlength="400"></textarea>
         </mat-form-field>
+
+        <input style="color: black" 
+        type="file"
+        id="file"
+        #userPhoto
+        (change)="onFileSelected($event)"
+        name="image"
+        autocomplete="off"
+        />
     </form>
 
-    <button mat-button #submitButton [disabled]="!form.valid"
+    <button style="margin-top: 20px" mat-button #submitButton [disabled]="!form.valid"
           color="accent" (click)="submitForm()"> Submit </button>
 </div>

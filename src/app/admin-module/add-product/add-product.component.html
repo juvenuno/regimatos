@@ -17,8 +17,18 @@
                 </mat-option>
             </mat-select>
         </mat-form-field>
+
+        <input style="color: black" 
+            type="file"
+            id="file"
+            #userPhoto
+            (change)="onFileSelected($event)"
+            name="image"
+            autocomplete="off"
+            />
+
     </form>
 
-    <button mat-button #submitButton [disabled]="!form.valid"
+    <button style="margin-top: 20px" mat-button #submitButton [disabled]="!form.valid"
           color="accent" (click)="submitForm()"> Submit </button>
 </div>
