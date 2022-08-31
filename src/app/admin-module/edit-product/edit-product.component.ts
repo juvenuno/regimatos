@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { Firestore, collection, query, where, getDocs, doc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, collection, query, where, getDocs, doc, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Product } from 'src/app/product/product.component';
+import { StorageService } from '../service/upload-service';
 
 @Component({
   selector: 'app-edit-product',
@@ -21,6 +22,7 @@ export class EditProductComponent {
     private firestore: Firestore,
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
+    private storageService: StorageService,
   ) { 
     this.form = this.formBuilder.group(new FormProduct())
   }
@@ -31,6 +33,7 @@ export class EditProductComponent {
     const q = query(prodCollection, where("type", "==", category));
     const querySnapshot = await getDocs(q);
     this.products = []
+    this.selectedProduct = undefined;
 
     console.log("getting products");
 
@@ -46,12 +49,12 @@ export class EditProductComponent {
         description: doc.data()['description'],
         type: doc.data()['type'],
         imageUrl: doc.data()['imageUrl'],
+        imageName: doc.data()['imageName'],
         timestamp: doc.data()['timestamp'],
         id: doc.id
       })
     });
 
-    this.selectedProduct = undefined;
     this.loading = false;
   }
 
@@ -90,7 +93,20 @@ export class EditProductComponent {
   deleteProduct() {
     this.loading = true;
     console.log("deleting product")
-    this.loading = false;
+
+    const docRef = doc(this.firestore, "products", this.selectedProduct!.id!)
+    deleteDoc(docRef).then(
+      _ => {
+        this.snackBar.open("Changes saved")
+        this.storageService.deleteFile("products", this.selectedProduct!.imageName)
+        this.getProducts(this.selectedProduct!.type)
+      }
+    ).catch(
+      error => {
+        this.snackBar.open("An error occured trying to save changes..")
+        this.loading = false;
+      }
+    )
   }
 }
 

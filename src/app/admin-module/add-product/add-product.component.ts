@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FileUploadService } from '../service/upload-service';
+import { StorageService } from '../service/upload-service';
 
 interface ProductType {
   name: string,
@@ -21,6 +21,7 @@ export class AddProductComponent {
   file: any
   saving = false;
   form: FormGroup;
+
   productTypes: ProductType[] = [
     { name: 'Cash register', code: 'registers' },
     { name: 'POS system', code: 'pos' },
@@ -33,7 +34,7 @@ export class AddProductComponent {
   constructor(
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
-    private uploadService: FileUploadService,
+    private uploadService: StorageService,
     private firestore: AngularFirestore,
   ) {
     this.form = this.formBuilder.group(new Product())
@@ -65,11 +66,14 @@ export class AddProductComponent {
     const product: Product = this.form.value
     product.imageUrl = imageUrl
     product.timestamp = Date.now()
+    product.imageName = this.fileName;
     console.log('saving product', product);
 
     this.firestore.collection('products').add(product).then(
       _ => {        
         this.form = this.formBuilder.group(new Product());
+        this.fileName = '';
+        this.file = undefined;
         this.snackBar.open("Product details saved.");
         this.saving = false;
       }
@@ -81,7 +85,6 @@ export class AddProductComponent {
       }
     );
   }
-  
 }
 
 class Product {
@@ -90,6 +93,7 @@ class Product {
     public description: string = '',
     public type: string = '',
     public imageUrl: string = '',
+    public imageName: string = '',
     public timestamp: number = 0,
   ){}
 }

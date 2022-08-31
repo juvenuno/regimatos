@@ -1,1 +1,28 @@
-<p>edit-blog-entry works!</p>
+<mat-progress-bar *ngIf="loading" mode="indeterminate"></mat-progress-bar>
+<p *ngIf="noBlogEntries">No blog entries</p>
+
+<div *ngIf="selectedBlogEntry === undefined">
+    <div *ngFor="let item of blogEntries" class="margin">
+        <a (click)="selectBlogEntry(item.id)">
+            <h4 style="cursor: pointer;">{{ item.title }}</h4>
+        </a><br>
+    </div>
+</div>
+
+
+<div *ngIf="selectedBlogEntry" class="margin">
+    <form [formGroup]="form">
+        <mat-form-field class="cardFormField">
+            <input matInput type="text" required placeholder="Title" formControlName="title" id="title" maxlength="100">
+        </mat-form-field>
+    
+        <mat-form-field class="cardFormField">
+            <textarea matInput type="text" color=warn required placeholder="Content" formControlName="content" id="content" maxlength="400"></textarea>
+        </mat-form-field>
+    </form>
+
+    <button (click)="saveChanges()"> Save changes </button>
+    <button class="margin" (click)="unselect()"> Cancel </button>
+    <button style="float: right;" class="margin" class="margin" 
+        (click)="deleteBlogEntry()"> Delete </button>
+</div>

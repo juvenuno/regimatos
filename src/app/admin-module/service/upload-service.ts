@@ -7,9 +7,8 @@ import { switchMap } from "rxjs/operators";
 @Injectable({
   providedIn: 'root'
 })
-export class FileUploadService {
-    private basePath = '/uploads';
-  
+export class StorageService {
+
     constructor(private storage: AngularFireStorage) { }
   
   
@@ -34,8 +33,7 @@ export class FileUploadService {
         );
     }
 
-    private deleteFileStorage(name: string): void {
-        const storageRef = this.storage.ref(this.basePath);
-        storageRef.child(name).delete();
+    public deleteFile(section: string, name: string): void {
+        this.storage.ref(section).child(name).delete();
     }
 }

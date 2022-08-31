@@ -1,10 +1,14 @@
 import { Component } from '@angular/core';
 import { Firestore, collection, query, where, getDocs } from '@angular/fire/firestore';
 
-interface BlogEntry {
+export interface BlogEntry {
   title: string,
   content: string,
   imageUrl: string,
+  imageName: string,
+  timestamp: number,
+  id?: string,
+  dateStr?: string,
 }
 
 @Component({
@@ -34,7 +38,10 @@ export class BlogComponent {
       this.blogEntries.push({
         title: doc.data()['title'],
         content: doc.data()['content'],
-        imageUrl: doc.data()['imageUrl']
+        imageUrl: doc.data()['imageUrl'],
+        imageName: doc.data()['imageName'],
+        timestamp: doc.data()['timestamp'],
+        dateStr: new Date(doc.data()['timestamp']).toLocaleString()
       })
     });
   }

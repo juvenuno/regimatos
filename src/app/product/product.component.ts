@@ -7,6 +7,7 @@ export interface Product{
   description: string,
   type: string,
   imageUrl: string,
+  imageName: string,
   timestamp: number,
   id?: string
 }
@@ -48,6 +49,7 @@ export class ProductComponent {
         description: doc.data()['description'],
         type: doc.data()['type'],
         imageUrl: doc.data()['imageUrl'],
+        imageName: doc.data()['imageName'],
         timestamp: doc.data()['timestamp'],
       })
     });

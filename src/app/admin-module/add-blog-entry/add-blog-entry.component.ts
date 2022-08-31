@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FileUploadService } from '../service/upload-service';
+import { StorageService } from '../service/upload-service';
 
 @Component({
   selector: 'add-blog-entry',
@@ -19,7 +19,7 @@ export class AddBlogEntryComponent {
     private firestore: AngularFirestore,
     private formBuilder: FormBuilder,
     public snackBar: MatSnackBar,
-    private uploadService: FileUploadService,
+    private uploadService: StorageService,
   ) {
     this.form = this.formBuilder.group(new BlogEntry())
   }
@@ -41,7 +41,7 @@ export class AddBlogEntryComponent {
 
     this.saving = true;
 
-    this.uploadService.saveFileToStorage('products', this.file).subscribe(
+    this.uploadService.saveFileToStorage('news', this.file).subscribe(
       url => this.saveNewsToFirestore(url)
     )
   }
@@ -49,11 +49,14 @@ export class AddBlogEntryComponent {
   saveNewsToFirestore(imageUrl: string) {
     const blogEntry: BlogEntry = this.form.value
     blogEntry.imageUrl = imageUrl;
+    blogEntry.imageName = this.fileName;
     blogEntry.timestamp = Date.now()
 
     this.firestore.collection('news').add(blogEntry).then(
       _ => {
         this.form = this.formBuilder.group(new BlogEntry());
+        this.file = undefined;
+        this.fileName = '';
         this.snackBar.open("Blog entry saved.");
         this.saving = false;
       }
@@ -72,6 +75,7 @@ class BlogEntry {
     public title: string = '',
     public content: string = '',
     public imageUrl: string = '',
+    public imageName: string = '',
     public timestamp: number = 0
   ){}
 }
