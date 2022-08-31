@@ -62,8 +62,9 @@ export class AddProductComponent {
   }
 
   private saveProductToFirestore(imageUrl: string) {
-    const product = this.form.value
+    const product: Product = this.form.value
     product.imageUrl = imageUrl
+    product.timestamp = Date.now()
     console.log('saving product', product);
 
     this.firestore.collection('products').add(product).then(
@@ -83,11 +84,12 @@ export class AddProductComponent {
   
 }
 
-export class Product {
+class Product {
   constructor(
     public name: string = '',
     public description: string = '',
     public type: string = '',
-    public imageUrl: string = ''
+    public imageUrl: string = '',
+    public timestamp: number = 0,
   ){}
 }

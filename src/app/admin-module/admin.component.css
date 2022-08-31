@@ -20,7 +20,7 @@ li {
     background-color: white;
 }
 
-p {
+p, h4 {
     color: black;
 }
 
@@ -31,4 +31,8 @@ p {
 }
     ::ng-deep .mat-simple-snackbar-action {
     color: black;
+}
+
+.margin {
+    margin: 10px;
 }

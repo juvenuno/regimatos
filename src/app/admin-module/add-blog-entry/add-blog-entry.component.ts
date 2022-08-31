@@ -47,8 +47,9 @@ export class AddBlogEntryComponent {
   }
 
   saveNewsToFirestore(imageUrl: string) {
-    const blogEntry = this.form.value
+    const blogEntry: BlogEntry = this.form.value
     blogEntry.imageUrl = imageUrl;
+    blogEntry.timestamp = Date.now()
 
     this.firestore.collection('news').add(blogEntry).then(
       _ => {
@@ -66,10 +67,11 @@ export class AddBlogEntryComponent {
   }
 }
 
-export class BlogEntry {
+class BlogEntry {
   constructor(
     public title: string = '',
     public content: string = '',
     public imageUrl: string = '',
+    public timestamp: number = 0
   ){}
 }

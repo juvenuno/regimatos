@@ -12,13 +12,17 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './admin.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AddBlogEntryComponent } from './add-blog-entry/add-blog-entry.component';
+import { EditBlogEntryComponent } from './edit-blog-entry/edit-blog-entry.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 
 @NgModule({
   declarations: [
     AdminComponent,
     AddProductComponent,
-    AddBlogEntryComponent
+    AddBlogEntryComponent,
+    EditBlogEntryComponent,
+    EditProductComponent
   ],
   imports: [
     CommonModule,

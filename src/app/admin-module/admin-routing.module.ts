@@ -4,6 +4,8 @@ import { AdminAuthGuard } from '../firebase-auth-ui/admin-auth-guard.service';
 import { AddBlogEntryComponent } from './add-blog-entry/add-blog-entry.component';
 import { AddProductComponent } from './add-product/add-product.component';
 import { AdminComponent } from './admin.component';
+import { EditBlogEntryComponent } from './edit-blog-entry/edit-blog-entry.component';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 const routes: Routes = [
   { 
@@ -17,8 +19,18 @@ const routes: Routes = [
         canActivate: [ AdminAuthGuard ]
       },
       {
+        path: 'edit-products',
+        component: EditProductComponent,
+        canActivate: [ AdminAuthGuard ]
+      },
+      {
         path: 'add-blog-entry',
         component: AddBlogEntryComponent,
+        canActivate: [ AdminAuthGuard ]
+      },
+      {
+        path: 'edit-blog-entries',
+        component: EditBlogEntryComponent,
         canActivate: [ AdminAuthGuard ]
       },
     ]

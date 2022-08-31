@@ -2,11 +2,13 @@ import { Component } from '@angular/core';
 import { Firestore, collection, query, where, getDocs } from '@angular/fire/firestore';
 import { ActivatedRoute } from '@angular/router';
 
-interface Product{
+export interface Product{
   name: string,
   description: string,
   type: string,
   imageUrl: string,
+  timestamp: number,
+  id?: string
 }
 
 @Component({
@@ -46,6 +48,7 @@ export class ProductComponent {
         description: doc.data()['description'],
         type: doc.data()['type'],
         imageUrl: doc.data()['imageUrl'],
+        timestamp: doc.data()['timestamp'],
       })
     });
   }
