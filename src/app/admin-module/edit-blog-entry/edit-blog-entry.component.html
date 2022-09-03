@@ -4,7 +4,7 @@
 <div *ngIf="selectedBlogEntry === undefined">
     <div *ngFor="let item of blogEntries" class="margin">
         <a (click)="selectBlogEntry(item.id)">
-            <h4 style="cursor: pointer;">{{ item.title }}</h4>
+            <h4 style="cursor: pointer;">{{ item.title }} ({{ item.dateStr }})</h4>
         </a><br>
     </div>
 </div>

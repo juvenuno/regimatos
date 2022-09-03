@@ -36,3 +36,10 @@ p, h4 {
 .margin {
     margin: 10px;
 }
+
+.menu-item {
+    padding:10px;
+    cursor: pointer;
+    margin: 2px;
+    border: solid 1 px white;
+}

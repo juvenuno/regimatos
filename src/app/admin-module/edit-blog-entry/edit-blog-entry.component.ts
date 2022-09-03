@@ -54,6 +54,7 @@ export class EditBlogEntryComponent implements OnInit {
         imageUrl: doc.data()['imageUrl'],
         imageName: doc.data()['imageName'],
         timestamp: doc.data()['timestamp'],
+        dateStr: new Date(doc.data()['timestamp']).toLocaleString(),
         id: doc.id
       })
     });
